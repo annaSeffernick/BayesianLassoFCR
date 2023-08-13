@@ -1,0 +1,27 @@
+model{
+  for(i in 1:N){
+    mu[i] <- inprod(betgma[], X[i,])
+    pi[i] <- icloglog(mu[i])
+    Y[i] ~ dbern(pi[i])
+  }
+  for(l in 1:K){
+    beta0[l] ~ dnorm(0, 0.1)
+  }
+  beta[1:K] <- sort(beta0[1:K])
+  for(k in (K+1):P){
+     beta[k] ~ ddexp(0, lambda)
+  }
+  lambda ~ dgamma(0.1, 0.1)
+  for(s in 1:K){
+    gamma[s] <- 1
+    betgma[s] <- beta[s]*gamma[s]
+  }
+  for(m in (K+1):P){
+    betgma[m] <- beta[m]*gamma[m]
+    gamma[m] ~ dbern(0.1)
+  }
+  
+  #inits# beta, lambda, .RNG.seed, .RNG.name
+  #monitor# beta, lambda, gamma, betgma
+  #modules# glm on
+}
