@@ -1,5 +1,4 @@
-# BayesianLassoFCR
-Bayesian Lasso Forward Continuation Ratio Model
+# Bayesian Lasso Forward Continuation Ratio Model
 
 High-dimensional variable selection for discrete survival outcomes using the Bayesian Lasso forward continuation ratio (FCR) 
 model with variable inclusion indicators.
